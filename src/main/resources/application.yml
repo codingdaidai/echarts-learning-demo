@@ -1,0 +1,19 @@
+server:
+  port: 9091
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: codingdaidai
+    url: jdbc:mysql://127.0.0.1:3306/echarts?autoReconnect=true&&useSSL=false&&serverTimezone=GMT%2B8
+    type: com.alibaba.druid.pool.DruidDataSource
+  spring:
+    resources:
+      static-locations=classpath: /static
+
+logging:
+  level:
+    com:
+      demon:
+        echarts_demo:
+          debug

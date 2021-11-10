@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+
+    <div id="echarts" style="width: 1000px; height: 800px"></div>
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.1.0/echarts.common.js"></script>
+    <script>
+        const option = {
+            legend: {
+                top: 'bottom'
+            },
+            toolbox: {
+                show: true,
+                feature: {
+                    mark: { show: true },
+                    dataView: { show: true, readOnly: false },
+                    restore: { show: true },
+                    saveAsImage: { show: true }
+                }
+            },
+            series: [
+                {
+                    name: 'Nightingale Chart',
+                    type: 'pie',
+                    radius: [50, 250],
+                    center: ['50%', '50%'],
+                    roseType: 'area',
+                    itemStyle: {
+                        borderRadius: 8
+                    },
+                    data: [
+
+                    ]
+                }
+            ]
+        };
+
+        var chartDom = document.getElementById("echarts");
+        var myVharts = echarts.init(chartDom)
+
+
+        fetch("/echarts").then(response => response.json()).then(res => {
+            res.forEach(item => {
+                option.series[0].data.push({name: item.name, value: item.count})
+            })
+            console.log(option)
+
+            myVharts.setOption(option);
+        })
+    </script>
+</body>
+</html>
